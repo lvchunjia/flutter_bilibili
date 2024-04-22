@@ -1,8 +1,7 @@
 import 'package:bili_net/http/core/hi_error.dart';
 import 'package:flutter/material.dart';
 
-import 'http/core/hi_net.dart';
-import 'http/request/test_request.dart';
+import 'http/dao/login_dao.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,20 +36,40 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() async {
-    TestRequest request = TestRequest();
-    request.add("aa", "ddd").add("bb", "333").add("requestPrams", "kkkk");
+    // TestRequest request = TestRequest();
+    // request.add("aa", "ddd").add("bb", "333").add("requestPrams", "kkkk");
+    //
+    // try {
+    //   var response = await HiNet.getInstance().fire(request);
+    //   print(response);
+    // } on NeedAuth catch (e) {
+    //   print(e);
+    // } on NeedLogin catch (e) {
+    //   print(e);
+    // } on HiNetError catch (e) {
+    //   print(e);
+    // } catch (e) {
+    //   print(e);
+    // }
 
+    testLogin();
+  }
+
+  void testLogin() async {
     try {
-      var response = await HiNet.getInstance().fire(request);
-      print(response);
+      var result = await LoginDao.registration(
+        '17864182410',
+        '123456',
+        '11187977',
+        '9516',
+      );
+      // var result2 = await LoginDao.login('用户名', '密码');
+      // print(result2);
+      print("registrationResult: $result");
     } on NeedAuth catch (e) {
-      print(e);
-    } on NeedLogin catch (e) {
-      print(e);
+      print("NeedAuth: $e");
     } on HiNetError catch (e) {
-      print(e);
-    } catch (e) {
-      print(e);
+      print("HiNetError: $e");
     }
   }
 

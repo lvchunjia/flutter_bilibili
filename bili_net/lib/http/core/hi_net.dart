@@ -22,9 +22,9 @@ class HiNet {
     try {
       response = await send(request);
     } on HiNetError catch (e) {
+      printLog("e: ${e.code}/${e.message}/${e.data}");
       error = e;
       response = e.data;
-      printLog(e.message);
     } catch (e) {
       //其它异常
       error = e;
